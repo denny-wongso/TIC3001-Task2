@@ -202,7 +202,7 @@ describe("Dogs", () => {
     describe("DELETE " + url, () => {
         // Test success delete a dog
         it("should delete a dog record", (done) => {
-            const id = 6
+            const id = 6 
              chai.request(app)
                  .delete(url + `/${id}`)
                  .end((err, res) => {

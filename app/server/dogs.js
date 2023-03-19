@@ -1,4 +1,8 @@
 const fs = require('fs')
+let config = require('config');
+let path = config.FILEPath
+const httpStatusCodes = require('../HttpStatusCode')
+
 
 var data = [];
 
@@ -13,7 +17,7 @@ function store(fs, arr) {
 }
 
 function writeToFile(fs, dogs) {
-    fs.writeFile('server/dogs.txt', dogs, err => {
+    fs.writeFile(path, dogs, err => {
         if (err) {
             console.error(err);
         }
@@ -22,7 +26,7 @@ function writeToFile(fs, dogs) {
 
 
 function readFromFile(fs) {
-    fs.readFile('server/dogs.txt', 'utf8', (err, data1) => {
+    fs.readFile(path, 'utf8', (err, data1) => {
         if (err) {
           console.error(err);
           return;
@@ -40,17 +44,37 @@ function readFromFile(fs) {
 
 const getDogs = (res) => {
     data = data
-    res({"status": "success", "message": "", "data": data})
+    if(data.length == 0) {
+        res({"statusCode": httpStatusCodes.BAD_REQUEST, "data": {"status": "fail", "message": "list is empty", "data": []}})
+    } else {
+        res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": "", "data": data}})
+    }
 }
 
 const getDog = (id, res) => {
-    each = data.find(c => c.id == id)
-    res({"status": "success", "message": "", "data": each})
+    var index = -1
+    for(i = 0; i < data.length; i++) {
+        if(data[i].id == id) {
+            index = i
+        }
+    }
+    if(index == -1) {
+        res({"statusCode": httpStatusCodes.NOT_FOUND, "data": {"status": "fail", "message": "dog not found"}})
+    } else {
+        res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": "", "data": data[index]}})
+    }
 }
 
 const addDog = (req, res) => {
     dog = {}
     const { name, breed, age, gender } = req.body
+    if(name == undefined || breed == undefined || age == undefined || gender == undefined
+        || (gender != "male" && gender != "female")
+        || isNaN(age)) {
+        res({"statusCode": httpStatusCodes.BAD_REQUEST, "data": {"status": "fail", "message": "wrong body"}})
+        return
+    }
+
     dog["id"] = data.length + 1
     dog["name"] = name
     dog["breed"] = breed
@@ -58,12 +82,19 @@ const addDog = (req, res) => {
     dog["gender"] = gender
     data.push(dog)
     store(fs, data)
-    res({"status": "success", "message": ""})
+    res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": ""}})
+    
 }
 
 const updateDog = (id, req, res) => {
     var dog = {}
     const { name, breed, age, gender } = req.body
+    if(name == undefined || breed == undefined || age == undefined || gender == undefined
+        || (gender != "male" && gender != "female")
+        || isNaN(age)) {
+        res({"statusCode": httpStatusCodes.BAD_REQUEST, "data": {"status": "fail", "message": "wrong body"}})
+        return
+    }
     dog["id"] = id
     dog["name"] = name
     dog["breed"] = breed
@@ -75,23 +106,37 @@ const updateDog = (id, req, res) => {
             index = i
         }
     }
+
+    if(index == -1) {
+        res({"statusCode": httpStatusCodes.NOT_FOUND, "data": {"status": "fail", "message": "wrong body"}})
+        return
+    }
+
     if (index >= 0) {
         data[index] = dog
     }
+    
     store(fs, data)
-    res({"status": "success", "message": ""})
+    res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": ""}})
 }
 
 const deleteDog = (id, res) => {
     newData = []
+    var isDeleted = false
     for(i = 0; i < data.length; i++) {
         if(data[i].id != id) {
             newData.push(data[i])
+        } else{
+            isDeleted = true
         }
+    }
+    if(isDeleted == false) {
+        res({"statusCode": httpStatusCodes.NOT_FOUND, "data": {"status": "fail", "message": "unable to delete"}})
+        return
     }
     data = newData
     store(fs, data)
-    res({"status": "success", "message": ""})
+    res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": ""}})
 }
 
 module.exports = {

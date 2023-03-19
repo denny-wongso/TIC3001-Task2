@@ -17,37 +17,39 @@ const local_path = '/api/v1/'
 
 app.get(local_path + 'dogs', (req,res) => {
   getDogs(async function(data) {
-      res.json(data)
+      res.status(data.statusCode).json(data.data)
   })
 })
 
-app.get(local_path +'dogs/:id', (req,res) => {
+app.get(local_path +'dogs/:id', (req, res) => {
   id = req.params.id
   getDog(id, async function(data) {
-    res.json(data)
+    res.status(data.statusCode).json(data.data)
   })
 })
 
 app.post(local_path + 'dogs', (req, res) => {
     addDog(req, async function(data) {
-      res.json(data)
+      res.status(data.statusCode).json(data.data)
     })
 })
 
 app.put(local_path + 'dogs/:id', (req, res) => {
   const { id } = req.params;
   updateDog(id, req, async function(data) {
-    res.json(data)
+    res.status(data.statusCode).json(data.data)
   })
 });
 
 app.delete(local_path + 'dogs/:id', (req, res) => {
   const { id } = req.params;
   deleteDog(id, async function(data) {
-    res.json(data)
+    res.status(data.statusCode).json(data.data)
   })
 });
 
 app.listen(PORT, HOST, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+module.exports = app

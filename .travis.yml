@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - 14
-scripts:
+  - "14"
+script:
   - cd app
   - echo "-----Build Start-----"
   - echo "-----Installing Dependencies-----"

@@ -2,6 +2,7 @@ language: node_js
 node_js:
   - node
 scripts:
+  - cd app
   - echo "-----Build Start-----"
   - echo "-----Installing Dependencies-----"
   - npm install

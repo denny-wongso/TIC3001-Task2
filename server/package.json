@@ -4,7 +4,7 @@
   "description": "node-app",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "set NODE_ENV=dev && node index.js",
     "dev": "nodemon index.js"
   },

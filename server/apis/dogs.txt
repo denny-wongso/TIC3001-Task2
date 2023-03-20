@@ -1,0 +1,24 @@
+{"id":1,"name":"Charlie","breed":"Affenhuahua","age":3,"gender":"male"}
+{"id":2,"name":"Buddy","breed":"Affenpinscher","age":6,"gender":"male"}
+{"id":3,"name":"Lucy","breed":"Akbash","age":2,"gender":"female"}
+{"id":4,"name":"Daisy","breed":"Akita inu","age":4,"gender":"female"}
+{"id":5,"name":"Rocky","breed":"Akita Shepherd","age":5,"gender":"male"}
+{"id":6,"name":"Sadie","breed":"Alaskan husky","age":1,"gender":"female"}
+{"id":7,"name":"Jack","breed":"American Bulldog","age":2,"gender":"male"}
+{"id":8,"name":"Molly","breed":"American Foxhound","age":7,"gender":"female"}
+{"id":9,"name":"Lola","breed":"Aussiedoodle","age":4,"gender":"female"}
+{"id":10,"name":"Max","breed":"Australian Cattle Dog","age":3,"gender":"male"}
+{"id":11,"name":"Bailey","breed":"australian terrier","age":5,"gender":"male"}
+{"id":12,"name":"Bella","breed":"Barbet","age":1,"gender":"female"}
+{"id":13,"name":"Cooper","breed":"Basset Hound","age":2,"gender":"male"}
+{"id":14,"name":"Duke","breed":"beabull","age":6,"gender":"male"}
+{"id":15,"name":"Rosie","breed":"Beagle","age":3,"gender":"female"}
+{"id":16,"name":"Buddy","breed":"bearded collies","age":2,"gender":"male"}
+{"id":17,"name":"Daisy","breed":"Bichon Frise","age":3,"gender":"female"}
+{"id":18,"name":"Max","breed":"Bloodhound","age":1,"gender":"male"}
+{"id":19,"name":"Bailey","breed":"blue lacy","age":4,"gender":"female"}
+{"id":20,"name":"Charlie","breed":"boerboel","age":2,"gender":"male"}
+{"id":21,"name":"Lucy","breed":"Afghan Hound","age":5,"gender":"female"}
+{"id":22,"name":"Rocky","breed":"shiba inu","age":3,"gender":"male"}
+{"id":23,"name":"Lola","breed":"Shih Tzu","age":1,"gender":"female"}
+{"id":24,"name":"Toby","breed":"havanese","age":2,"gender":"male"}

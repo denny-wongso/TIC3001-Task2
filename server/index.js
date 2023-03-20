@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
 
-const { getDogs, getDog, addDog, deleteDog, updateDog } = require('./server/dogs');
+const { getDogs, getDog, addDog, deleteDog, updateDog } = require('./apis/dogs');
 
 
 const app = express();

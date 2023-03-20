@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs');
+const cors = require('cors');
 
 const { getDogs, getDog, addDog, deleteDog, updateDog } = require('./apis/dogs');
 
@@ -10,6 +11,7 @@ app.use(express.static('public'));
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 app.use(express.json())
+app.use(cors());
 
 const PORT = 8081;
 const HOST = '0.0.0.0';

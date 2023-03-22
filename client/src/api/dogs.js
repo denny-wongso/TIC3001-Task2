@@ -9,6 +9,5 @@ export const fetchDogs = async() => {
     }).catch(e =>  {
         return []
     })
-
     return res
 }

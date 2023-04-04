@@ -67,7 +67,7 @@ const getDog = (id, res) => {
 
 const addDog = (req, res) => {
     dog = {}
-    const { name, breed, age, gender } = req.body
+    const { name, breed, age, gender, imageURL } = req.body
     if(name == undefined || breed == undefined || age == undefined || gender == undefined
         || (gender != "male" && gender != "female")
         || isNaN(age)) {
@@ -80,6 +80,7 @@ const addDog = (req, res) => {
     dog["breed"] = breed
     dog["age"] = age
     dog["gender"] = gender
+    dog["imageURL"] = "./images/" + imageURL
     data.push(dog)
     store(fs, data)
     res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": ""}})
@@ -88,7 +89,7 @@ const addDog = (req, res) => {
 
 const updateDog = (id, req, res) => {
     var dog = {}
-    const { name, breed, age, gender } = req.body
+    const { name, breed, age, gender, imageURL } = req.body
     if(name == undefined || breed == undefined || age == undefined || gender == undefined
         || (gender != "male" && gender != "female")
         || isNaN(age)) {
@@ -100,6 +101,7 @@ const updateDog = (id, req, res) => {
     dog["breed"] = breed
     dog["age"] = age
     dog["gender"] = gender
+    dog["imageURL"] = imageURL
     var index = -1
     for(i = 0; i < data.length; i++) {
         if(data[i].id == id) {

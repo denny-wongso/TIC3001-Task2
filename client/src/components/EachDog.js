@@ -5,9 +5,8 @@ import Fab from '@mui/material/Fab';
 import 'animate.css';
 
 const EachDog = ({ dog, breeds, size, options, isDone, cb }) => {
-    const {name, age, breed, gender} = dog
+    const {name, age, breed, gender, imageURL} = dog
     
-    var image = ("./images/" + breed + ".png").replaceAll(" ","-").toLowerCase()
     return (
         <div className = {"animate__animated" + 
                             (isDone ? (" animate__bounceOutLeft") : (" animate__bounceInRight"))}
@@ -20,7 +19,7 @@ const EachDog = ({ dog, breeds, size, options, isDone, cb }) => {
                                 { name + "(" + age + " years old) " + gender } 
                             </h3>
                         </Grid>
-                        <Grid item xs={12} md={12} style={{backgroundImage: `url(${image})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', height:'400px'}}/>
+                        <Grid item xs={12} md={12} style={{backgroundImage: `url(${imageURL})`, backgroundSize: 'contain', backgroundRepeat: 'no-repeat', height:'400px'}}/>
                     </Grid>
                     <Grid item xs={4} md={4}>
                         <Stack spacing={6} sx={{ m: 8 }}>

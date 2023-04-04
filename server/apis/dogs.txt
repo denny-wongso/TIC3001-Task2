@@ -1,24 +1,24 @@
-{"id":1,"name":"Charlie","breed":"Affenhuahua","age":3,"gender":"male"}
-{"id":2,"name":"Buddy","breed":"Affenpinscher","age":6,"gender":"male"}
-{"id":3,"name":"Lucy","breed":"Akbash","age":2,"gender":"female"}
-{"id":4,"name":"Daisy","breed":"Akita inu","age":4,"gender":"female"}
-{"id":5,"name":"Rocky","breed":"Akita Shepherd","age":5,"gender":"male"}
-{"id":6,"name":"Sadie","breed":"Alaskan husky","age":1,"gender":"female"}
-{"id":7,"name":"Jack","breed":"American Bulldog","age":2,"gender":"male"}
-{"id":8,"name":"Molly","breed":"American Foxhound","age":7,"gender":"female"}
-{"id":9,"name":"Lola","breed":"Aussiedoodle","age":4,"gender":"female"}
-{"id":10,"name":"Max","breed":"Australian Cattle Dog","age":3,"gender":"male"}
-{"id":11,"name":"Bailey","breed":"australian terrier","age":5,"gender":"male"}
-{"id":12,"name":"Bella","breed":"Barbet","age":1,"gender":"female"}
-{"id":13,"name":"Cooper","breed":"Basset Hound","age":2,"gender":"male"}
-{"id":14,"name":"Duke","breed":"beabull","age":6,"gender":"male"}
-{"id":15,"name":"Rosie","breed":"Beagle","age":3,"gender":"female"}
-{"id":16,"name":"Buddy","breed":"bearded collies","age":2,"gender":"male"}
-{"id":17,"name":"Daisy","breed":"Bichon Frise","age":3,"gender":"female"}
-{"id":18,"name":"Max","breed":"Bloodhound","age":1,"gender":"male"}
-{"id":19,"name":"Bailey","breed":"blue lacy","age":4,"gender":"female"}
-{"id":20,"name":"Charlie","breed":"boerboel","age":2,"gender":"male"}
-{"id":21,"name":"Lucy","breed":"Afghan Hound","age":5,"gender":"female"}
-{"id":22,"name":"Rocky","breed":"shiba inu","age":3,"gender":"male"}
-{"id":23,"name":"Lola","breed":"Shih Tzu","age":1,"gender":"female"}
-{"id":24,"name":"Toby","breed":"havanese","age":2,"gender":"male"}
+{"id":1,"name":"Charlie","breed":"Affenhuahua","age":3,"gender":"male","imageURL":"./images/affenhuahua.png"}
+{"id":2,"name":"Buddy","breed":"Affenpinscher","age":6,"gender":"male","imageURL":"./images/affenpinscher.png"}
+{"id":3,"name":"Lucy","breed":"Akbash","age":2,"gender":"female","imageURL":"./images/akbash.png"}
+{"id":4,"name":"Daisy","breed":"Akita inu","age":4,"gender":"female","imageURL":"./images/akita-inu.png"}
+{"id":5,"name":"Rocky","breed":"Akita Shepherd","age":5,"gender":"male","imageURL":"./images/akita-shepherd.png"}
+{"id":6,"name":"Sadie","breed":"Alaskan husky","age":1,"gender":"female","imageURL":"./images/alaskan-husky.png"}
+{"id":7,"name":"Jack","breed":"American Bulldog","age":2,"gender":"male","imageURL":"./images/american-bulldog.png"}
+{"id":8,"name":"Molly","breed":"American Foxhound","age":7,"gender":"female","imageURL":"./images/american-foxhound.png"}
+{"id":9,"name":"Lola","breed":"Aussiedoodle","age":4,"gender":"female","imageURL":"./images/aussiedoodle.png"}
+{"id":10,"name":"Max","breed":"Australian Cattle Dog","age":3,"gender":"male","imageURL":"./images/australian-cattle-dog.png"}
+{"id":11,"name":"Bailey","breed":"australian terrier","age":5,"gender":"male","imageURL":"./images/australian-terrier.png"}
+{"id":12,"name":"Bella","breed":"Barbet","age":1,"gender":"female","imageURL":"./images/barbet.png"}
+{"id":13,"name":"Cooper","breed":"Basset Hound","age":2,"gender":"male","imageURL":"./images/basset-hound.png"}
+{"id":14,"name":"Duke","breed":"beabull","age":6,"gender":"male","imageURL":"./images/beabull.png"}
+{"id":15,"name":"Rosie","breed":"Beagle","age":3,"gender":"female","imageURL":"./images/beagle.png"}
+{"id":16,"name":"Buddy","breed":"bearded collies","age":2,"gender":"male","imageURL":"./images/bearded-collies.png"}
+{"id":17,"name":"Daisy","breed":"Bichon Frise","age":3,"gender":"female","imageURL":"./images/bichon-frise.png"}
+{"id":18,"name":"Max","breed":"Bloodhound","age":1,"gender":"male","imageURL":"./images/bloodhound.png"}
+{"id":19,"name":"Bailey","breed":"blue lacy","age":4,"gender":"female","imageURL":"./images/blue-lacy.png"}
+{"id":20,"name":"Charlie","breed":"boerboel","age":2,"gender":"male","imageURL":"./images/boerboel.png"}
+{"id":21,"name":"Lucy","breed":"Afghan Hound","age":5,"gender":"female","imageURL":"./images/afghan-hound.png"}
+{"id":22,"name":"Rocky","breed":"shiba inu","age":3,"gender":"male","imageURL":"./images/shiba-inu.png"}
+{"id":23,"name":"Lola","breed":"Shih Tzu","age":1,"gender":"female","imageURL":"./images/shih-tzu.png"}
+{"id":24,"name":"Toby","breed":"havanese","age":2,"gender":"male","imageURL":"./images/havanese.png"}

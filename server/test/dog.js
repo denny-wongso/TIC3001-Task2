@@ -14,7 +14,6 @@ const url = "/api/v1/dogs"
 const token = process.env.TOKEN
 describe("Dogs", () => {
     describe("GET " + url, () => {
-        console.log(token) 
         // Test to get all dogs record
         it("should get all dogs record", (done) => {
              chai.request(app)

@@ -6,7 +6,6 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(req.body.test == 'true')
     if(req.body.test == 'true') {
       cb(null, './test/')
     } else {
@@ -14,7 +13,6 @@ const storage = multer.diskStorage({
     }
   },
   filename: (req, file, cb) => {
-    console.log(req.body.test == 'true')
     if(req.body.test == 'true') {
       var name = file.originalname
     } else {

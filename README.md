@@ -1,3 +1,4 @@
+[![Build Status](https://app.travis-ci.com/denny-wongso/TIC3001-Task2.svg?branch=master)](https://app.travis-ci.com/denny-wongso/TIC3001-Task2)
 # TIC3001-Task2
 
 # How to start

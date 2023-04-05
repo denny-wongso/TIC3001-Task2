@@ -7,3 +7,6 @@ script:
   - npm run test
 env:
   - TOKEN = $TOKEN
+  - CLIENT_ORIGIN_URL = $CLIENT_ORIGIN_URL
+  - AUTH0_AUDIENCE = $AUTH0_AUDIENCE
+  - AUTH0_DOMAIN = $AUTH0_DOMAIN

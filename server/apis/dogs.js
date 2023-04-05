@@ -101,7 +101,7 @@ const updateDog = (id, req, res) => {
     dog["breed"] = breed
     dog["age"] = age
     dog["gender"] = gender
-    dog["imageURL"] = imageURL
+    dog["imageURL"] = "./images/" + imageURL
     var index = -1
     for(i = 0; i < data.length; i++) {
         if(data[i].id == id) {

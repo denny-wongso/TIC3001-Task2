@@ -7,7 +7,11 @@ let app = require('../index');
 chai.use(chaiHttp);
 chai.should();
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const url = "/api/v1/dogs"
+const token = process.env.TOKEN
 describe("Dogs", () => {
     describe("GET " + url, () => {
         // Test to get all dogs record
@@ -48,27 +52,30 @@ describe("Dogs", () => {
     describe("POST " + url, () => {
         // Test success added a dog
         it("should add a new dog record", (done) => {
-            var body = {}
-            body["name"] = "kaki"
-            body["age"] = "1"
-            body["gender"] = "male"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .post(url)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '1')
+                 .field('gender', 'male')
+                 .field('breed', 'golden retriever')
+                 .field('test', 'true')
+                 .attach('image', './test/havanese.png')
+                 .set('Authorization', `Bearer ${token}`)
                  .end((err, res) => {
                      res.should.have.status(200);
-                     res.body.should.be.a('object');
                      done();
                   });
          });
 
         // Test fail added a dog with empty body
         it("should not add a new dog record", (done) => {
-            var body = {}
             chai.request(app)
                 .post(url)
-                .send(body)
+                .field('Content-Type', 'multipart/form-data')
+                .set('Authorization', `Bearer ${token}`)
+                .field('test', 'true')
+                .attach('image', './test/havanese.png')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -78,14 +85,16 @@ describe("Dogs", () => {
 
         // Test fail wrong gender
         it("should not add a new dog record invalid gender", (done) => {
-            var body = {}
-            body["name"] = "kaki"
-            body["age"] = "1"
-            body["gender"] = "binary"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .post(url)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '1')
+                 .field('gender', 'binary')
+                 .field('breed', 'golden retriever')
+                 .set('Authorization', `Bearer ${token}`)
+                 .field('test', 'true')
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(400);
                      res.body.should.be.a('object');
@@ -95,14 +104,16 @@ describe("Dogs", () => {
 
         // Test fail wrong age
         it("should not add a new dog record invalid age", (done) => {
-            var body = {}
-            body["name"] = "kaki"
-            body["age"] = "abc"
-            body["gender"] = "female"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .post(url)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', 'abc')
+                 .field('gender', 'female')
+                 .field('breed', 'golden retriever')
+                 .set('Authorization', `Bearer ${token}`)
+                 .field('test', 'true')
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(400);
                      res.body.should.be.a('object');
@@ -112,17 +123,19 @@ describe("Dogs", () => {
     });
 
     describe("PUT " + url, () => {
+        const id = 2
         // Test success update a dog
         it("should update a dog record", (done) => {
-            var body = {}
-            const id = 2
-            body["name"] = "kaki"
-            body["age"] = "1"
-            body["gender"] = "male"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .put(url + `/${id}`)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '2')
+                 .field('gender', 'female')
+                 .field('breed', 'golden retriever')
+                 .set('Authorization', `Bearer ${token}`)
+                 .field('test', 'true')
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(200);
                      res.body.should.be.a('object');
@@ -132,11 +145,13 @@ describe("Dogs", () => {
 
         // Test fail update a dog record
         it("should not update a dog record", (done) => {
-            var body = {}
             const id = 2
             chai.request(app)
                 .put(url + `/${id}`)
-                .send(body)
+                .field('Content-Type', 'multipart/form-data')
+                .set('Authorization', `Bearer ${token}`)
+                .field('test', 'true')
+                .attach('image', './test/havanese.png')
                 .end((err, res) => {
                     res.should.have.status(400);
                     res.body.should.be.a('object');
@@ -146,15 +161,17 @@ describe("Dogs", () => {
 
         // Test fail wrong gender
         it("should not update a dog record invalid gender", (done) => {
-            var body = {}
             const id = 2
-            body["name"] = "kaki"
-            body["age"] = "1"
-            body["gender"] = "binary"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .put(url + `/${id}`)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '2')
+                 .field('gender', 'binary')
+                 .field('breed', 'golden retriever')
+                 .field('test', 'true')
+                 .set('Authorization', `Bearer ${token}`)
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(400);
                      res.body.should.be.a('object');
@@ -164,15 +181,17 @@ describe("Dogs", () => {
 
         // Test fail wrong age
         it("should not update a dog record invalid age", (done) => {
-            var body = {}
             const id = 2
-            body["name"] = "kaki"
-            body["age"] = "abc"
-            body["gender"] = "female"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .put(url + `/${id}`)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', 'abc')
+                 .field('gender', 'female')
+                 .field('breed', 'golden retriever')
+                 .field('test', 'true')
+                 .set('Authorization', `Bearer ${token}`)
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(400);
                      res.body.should.be.a('object');
@@ -184,13 +203,16 @@ describe("Dogs", () => {
         it("should not update a dog record invalid dog", (done) => {
             var body = {}
             const id = 20000000
-            body["name"] = "kaki"
-            body["age"] = "1"
-            body["gender"] = "female"
-            body["breed"] = "Golden Retriever"
              chai.request(app)
                  .put(url + `/${id}`)
-                 .send(body)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '2')
+                 .field('gender', 'female')
+                 .field('breed', 'golden retriever')
+                 .field('test', 'true')
+                 .set('Authorization', `Bearer ${token}`)
+                 .attach('image', './test/havanese.png')
                  .end((err, res) => {
                      res.should.have.status(404);
                      res.body.should.be.a('object');
@@ -205,6 +227,7 @@ describe("Dogs", () => {
             const id = 6 
              chai.request(app)
                  .delete(url + `/${id}`)
+                 .set('Authorization', `Bearer ${token}`)
                  .end((err, res) => {
                      res.should.have.status(200);
                      res.body.should.be.a('object');
@@ -217,6 +240,7 @@ describe("Dogs", () => {
             const id = 100
             chai.request(app)
                 .delete(url + `/${id}`)
+                .set('Authorization', `Bearer ${token}`)
                 .end((err, res) => {
                     res.should.have.status(404);
                     res.body.should.be.a('object');

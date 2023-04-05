@@ -6,15 +6,25 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    console.log(req.body.test == 'true')
+    if(req.body.test == 'true') {
+      cb(null, './test/')
+    } else {
       cb(null, '../client/public/images/')
+    }
   },
   filename: (req, file, cb) => {
+    console.log(req.body.test == 'true')
+    if(req.body.test == 'true') {
+      var name = file.originalname
+    } else {
       var name = Date.now() + path.extname(file.originalname)
-      cb(null, name)
+    }
+    cb(null, name)
 
-      req.middlewareStorage = {
-          fileimage : name
-      }
+    req.middlewareStorage = {
+        fileimage : name
+    }
   }
 })
 const upload = multer({storage: storage})
@@ -63,8 +73,10 @@ app.post(local_path + 'dogs', validateAccessToken, checkRequiredPermissions(["wr
     })
 })
 
-app.put(local_path + 'dogs/:id', validateAccessToken, checkRequiredPermissions(["update:new-dog"]), (req, res) => {
+app.put(local_path + 'dogs/:id', validateAccessToken, checkRequiredPermissions(["update:new-dog"]),  upload.single("image"), (req, res) => {
   const { id } = req.params;
+  var fileimage = req.middlewareStorage.fileimage;
+  req.body.imageURL = fileimage
   updateDog(id, req, async function(data) {
     res.status(data.statusCode).json(data.data)
   })

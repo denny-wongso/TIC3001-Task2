@@ -12,6 +12,7 @@ dotenv.config();
 
 const url = "/api/v1/dogs"
 const token = process.env.TOKEN
+const token_norole = process.env.TOKEN_NOROLE
 describe("Dogs", () => {
     describe("GET " + url, () => {
         // Test to get all dogs record
@@ -104,22 +105,40 @@ describe("Dogs", () => {
 
         // Test fail wrong age
         it("should not add a new dog record invalid age", (done) => {
-             chai.request(app)
-                 .post(url)
-                 .field('Content-Type', 'multipart/form-data')
-                 .field('name', 'kaki')
-                 .field('age', 'abc')
-                 .field('gender', 'female')
-                 .field('breed', 'golden retriever')
-                 .set('Authorization', `Bearer ${token}`)
-                 .field('test', 'true')
-                 .attach('image', './test/havanese.png')
-                 .end((err, res) => {
-                     res.should.have.status(400);
-                     res.body.should.be.a('object');
-                     done();
-                  });
-        });
+            chai.request(app)
+                .post(url)
+                .field('Content-Type', 'multipart/form-data')
+                .field('name', 'kaki')
+                .field('age', 'abc')
+                .field('gender', 'female')
+                .field('breed', 'golden retriever')
+                .set('Authorization', `Bearer ${token}`)
+                .field('test', 'true')
+                .attach('image', './test/havanese.png')
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    res.body.should.be.a('object');
+                    done();
+                 });
+       });
+       // Test fail unauthorized
+       it("should not add a new dog record unauthorized", (done) => {
+        chai.request(app)
+            .post(url)
+            .field('Content-Type', 'multipart/form-data')
+            .field('name', 'kaki')
+            .field('age', 'abc')
+            .field('gender', 'female')
+            .field('breed', 'golden retriever')
+            .set('Authorization', `Bearer ${token_norole}`)
+            .field('test', 'true')
+            .attach('image', './test/havanese.png')
+            .end((err, res) => {
+                res.should.have.status(403);
+                res.body.should.be.a('object');
+                done();
+             });
+   });
     });
 
     describe("PUT " + url, () => {
@@ -219,6 +238,27 @@ describe("Dogs", () => {
                      done();
                   });
         });
+
+        // Test fail unauthorized
+        it("should not update a dog record unauthorized", (done) => {
+            var body = {}
+            const id = 20000000
+             chai.request(app)
+                 .put(url + `/${id}`)
+                 .field('Content-Type', 'multipart/form-data')
+                 .field('name', 'kaki')
+                 .field('age', '2')
+                 .field('gender', 'female')
+                 .field('breed', 'golden retriever')
+                 .field('test', 'true')
+                 .set('Authorization', `Bearer ${token_norole}`)
+                 .attach('image', './test/havanese.png')
+                 .end((err, res) => {
+                     res.should.have.status(403);
+                     res.body.should.be.a('object');
+                     done();
+                  });
+        });
     });
 
     describe("DELETE " + url, () => {
@@ -243,6 +283,19 @@ describe("Dogs", () => {
                 .set('Authorization', `Bearer ${token}`)
                 .end((err, res) => {
                     res.should.have.status(404);
+                    res.body.should.be.a('object');
+                    done();
+                });
+        });
+
+        // Test fail unauthorized
+        it("should not delete a dog record unauthorized", (done) => {
+            const id = 100
+            chai.request(app)
+                .delete(url + `/${id}`)
+                .set('Authorization', `Bearer ${token_norole}`)
+                .end((err, res) => {
+                    res.should.have.status(403);
                     res.body.should.be.a('object');
                     done();
                 });

@@ -8,6 +8,7 @@ env:
   - CLIENT_ORIGIN_URL = $CLIENT_ORIGIN_URL
   - AUTH0_AUDIENCE = $AUTH0_AUDIENCE
   - AUTH0_DOMAIN = $AUTH0_DOMAIN
+  - TOKEN_NOROLE = $TOKEN_NOROLE
  script:
   - cd server
   - npm install

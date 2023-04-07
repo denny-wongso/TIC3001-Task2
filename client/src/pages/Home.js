@@ -20,6 +20,7 @@ export const Home = () => {
   const [score, setScore] = useState(0);
   const [isDone, setDone] = useState(false);
   const [options, setOptions] = useState([]);
+  const [clicked, setClicked] = useState(false);
 
   const {
       getAccessTokenSilently
@@ -40,13 +41,17 @@ export const Home = () => {
   }, [getAccessTokenSilently])
 
   const handleButtonClick = async (breed) => {
-    setDone(true)
-    if(breed === dogs[index].breed) {
-      setScore(score + 1)
+    if(!clicked) {
+      setClicked(true)
+      setDone(true)
+      if(breed === dogs[index].breed) {
+        setScore(score + 1)
+      }
+      await delay(1000);
+      instantiateDog((index + 1) % dogs.length, dogs)
+      setDone(false)
+      setClicked(false)
     }
-    await delay(1000);
-    instantiateDog(index + 1, dogs)
-    setDone(false)
   };
 
   const resetButtonClick = () => {

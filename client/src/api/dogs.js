@@ -31,13 +31,19 @@ export const addDog = async(token, name, age, gender, breed, image) => {
     return res
 }
 
-export const updateDog = async(token, id, body) => {
-    const res = axios.put(dogsURL + `/${id}`, {
+export const updateDog = async(token, id, name, age, gender, breed, image) => {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("age", age);
+    formData.append("gender", gender);
+    formData.append("breed", breed);
+    formData.append("image", image);
+    const res = axios.put(dogsURL + `/${id}`, formData, {
         headers: {
-            "content-type": "application/json",
+            "content-type": 'multipart/form-data',
             Authorization: `Bearer ${token}`
         }
-    }, body).then(response => {
+    }).then(response => {
         return response.status
     }).catch(e =>  {
         return []

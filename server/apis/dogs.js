@@ -37,7 +37,7 @@ function readFromFile(fs) {
             test[i] = JSON.parse(line);
             i = i + 1;
         });
-        data = test;
+        data = test.reverse();
     });
 }
 

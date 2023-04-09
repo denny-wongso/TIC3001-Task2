@@ -257,7 +257,15 @@ export const Admin = () => {
                           <Avatar alt="dog" src= {dog.imageURL} />
                       </ListItemAvatar>
                       <ListItemText
-                      primary= {dog.name}
+                      primary= {
+                        <React.Fragment>
+                          <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              color="text.primary">
+                              {dog.name} ({dog.gender})
+                          </Typography>
+                        </React.Fragment>}
                       secondary={
                           <React.Fragment>
                           <Typography

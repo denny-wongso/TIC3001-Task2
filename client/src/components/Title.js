@@ -1,7 +1,7 @@
 const Title = () => {
     
     return (
-        <h1 style= {{textAlign: "center", fontSize: '120px', color: 'white'}}>Dog Breed Quiz</h1>
+        <h1 style= {{textAlign: "center", fontSize: '120px', color: 'white'}}>Guess the Breed</h1>
     )
 }
 

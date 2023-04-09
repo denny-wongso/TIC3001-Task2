@@ -1,14 +1,27 @@
 const fs = require('fs')
 let config = require('config');
+const redis = require('redis');
 let path = config.FILEPath
 const httpStatusCodes = require('../HttpStatusCode')
+
+let redisClient;
+
+(async () => {
+  redisClient = redis.createClient();
+
+  redisClient.on("error", (error) => console.error(`Error : ${error}`));
+
+  await redisClient.connect();
+})();
+
 
 
 var data = [];
 
 readFromFile(fs);
 
-function store(fs, arr) {
+async function store(fs, arr) {
+    await redisClient.set("dogs", JSON.stringify(arr));
     var dogs = ""
     for(var i = 0; i < arr.length; i++) {
         dogs += JSON.stringify(arr[i]) + ((i + 1) < arr.length ? "\n" : "");
@@ -26,7 +39,7 @@ function writeToFile(fs, dogs) {
 
 
 function readFromFile(fs) {
-    fs.readFile(path, 'utf8', (err, data1) => {
+    fs.readFile(path, 'utf8', async (err, data1) => {
         if (err) {
           console.error(err);
           return;
@@ -37,17 +50,36 @@ function readFromFile(fs) {
             test[i] = JSON.parse(line);
             i = i + 1;
         });
-        data = test.reverse();
+        data = test;
+        await redisClient.set("dogs", JSON.stringify(data));
     });
 }
 
 
-const getDogs = (res) => {
-    data = data
-    if(data.length == 0) {
-        res({"statusCode": httpStatusCodes.BAD_REQUEST, "data": {"status": "fail", "message": "list is empty", "data": []}})
-    } else {
-        res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": "", "data": data}})
+const getDogs = async (res) => {
+    let results;
+    let isCached = false;
+    try {
+        console.log("redis")
+        const cacheResults = await redisClient.get("dogs");
+        if (cacheResults) {
+            console.log("data from cache")
+            isCached = true;
+            results = JSON.parse(cacheResults);
+        } else {
+            console.log("data not from cache")
+            results = data;
+            if (results.length === 0) {
+                res({"statusCode": httpStatusCodes.BAD_REQUEST, "data": {"status": "fail", "message": "list is empty", "data": []}})
+                return
+            }
+            await redisClient.set("dogs", JSON.stringify(results));
+        }
+        res({"statusCode": httpStatusCodes.OK, "data": {"status": "success", "message": "", "data": results}})
+    
+    } catch (error) {
+        console.error(error);
+        res({"statusCode": httpStatusCodes.INTERNAL_SERVER_ERROR, "data": {"status": "fail", "message": "Error retrieving data from Redis", "data": []}})
     }
 }
 

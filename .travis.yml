@@ -3,6 +3,9 @@ node_js:
   - 14
 before_script:
   - source .env # load environment variables from .env file
+  - sudo service redis-server start # start Redis server
+services:
+  - redis-server
 env:
   - TOKEN = $TOKEN
   - CLIENT_ORIGIN_URL = $CLIENT_ORIGIN_URL

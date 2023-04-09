@@ -1,9 +1,6 @@
 language: node_js
 node_js:
   - 14
-before_script:
-  - source server/.env # load environment variables from .env file
-  - sudo service redis-server start # start Redis server
 services:
   - redis-server
 env:
@@ -13,6 +10,7 @@ env:
   - AUTH0_DOMAIN=$AUTH0_DOMAIN
   - TOKEN_NOROLE=$TOKEN_NOROLE
 script:
+  - sudo service redis-server start # start Redis server
   - cd server
   - npm install
   - npm run test
